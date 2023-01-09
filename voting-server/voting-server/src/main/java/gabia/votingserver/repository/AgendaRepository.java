@@ -7,5 +7,4 @@ import java.awt.print.Pageable;
 import java.util.List;
 
 public interface AgendaRepository extends JpaRepository<Agenda, Long> {
-    public List<Agenda> findAllOrderByStartsAt(Pageable pageable);
 }
