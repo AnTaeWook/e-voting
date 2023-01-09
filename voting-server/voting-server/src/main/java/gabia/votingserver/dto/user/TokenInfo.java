@@ -1,4 +1,4 @@
-package gabia.votingserver.dto;
+package gabia.votingserver.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,6 +1,6 @@
 package gabia.votingserver.jwt;
 
-import gabia.votingserver.dto.TokenInfo;
+import gabia.votingserver.dto.user.TokenInfo;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -16,7 +16,6 @@ import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Arrays;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
