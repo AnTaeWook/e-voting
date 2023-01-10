@@ -43,7 +43,7 @@ public class AgendaController {
         agendaService.removeAgenda(agendaId);
     }
 
-    @GetMapping("/agendas/{id}/terminate")
+    @PatchMapping("/agendas/{id}/terminate")
     public SimpleAgendaResponseDto end(@PathVariable("id") Long agendaId) {
         return SimpleAgendaResponseDto.from(agendaService.terminate(agendaId));
     }
