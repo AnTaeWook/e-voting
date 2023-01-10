@@ -48,7 +48,7 @@ public class Agenda {
 
     public static Agenda of(AgendaCreateRequestDto requestDto) {
         return new Agenda(requestDto.getTitle(), requestDto.getType(),
-                requestDto.getStartsAt().getLocalDateTime(), requestDto.getEndsAt().getLocalDateTime());
+                requestDto.getStartsAt(), requestDto.getEndsAt());
     }
 
     public static Agenda create(String title, AgendaType type, LocalDateTime startsAt, LocalDateTime endsAt) {
