@@ -1,6 +1,6 @@
 package gabia.votingserver.dto.user;
 
-import gabia.votingserver.domain.Role;
+import gabia.votingserver.domain.type.Role;
 import lombok.Data;
 
 @Data

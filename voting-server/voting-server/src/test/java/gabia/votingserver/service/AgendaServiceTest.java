@@ -1,7 +1,7 @@
 package gabia.votingserver.service;
 
 import gabia.votingserver.domain.Agenda;
-import gabia.votingserver.domain.AgendaType;
+import gabia.votingserver.domain.type.AgendaType;
 import gabia.votingserver.repository.AgendaRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;

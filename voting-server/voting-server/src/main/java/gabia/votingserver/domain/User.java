@@ -1,5 +1,6 @@
 package gabia.votingserver.domain;
 
+import gabia.votingserver.domain.type.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

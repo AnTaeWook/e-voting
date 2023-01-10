@@ -1,6 +1,6 @@
 package gabia.votingserver.dto.agenda;
 
-import gabia.votingserver.domain.AgendaType;
+import gabia.votingserver.domain.type.AgendaType;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 

@@ -1,12 +1,12 @@
 package gabia.votingserver.domain;
 
+import gabia.votingserver.domain.type.AgendaType;
 import gabia.votingserver.dto.agenda.AgendaCreateRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 

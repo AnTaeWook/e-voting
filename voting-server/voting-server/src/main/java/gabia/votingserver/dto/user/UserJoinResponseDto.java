@@ -1,6 +1,6 @@
 package gabia.votingserver.dto.user;
 
-import gabia.votingserver.domain.Role;
+import gabia.votingserver.domain.type.Role;
 import gabia.votingserver.domain.User;
 import lombok.Data;
 import lombok.NoArgsConstructor;

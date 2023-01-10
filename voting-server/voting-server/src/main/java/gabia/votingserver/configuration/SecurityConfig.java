@@ -1,6 +1,6 @@
 package gabia.votingserver.configuration;
 
-import gabia.votingserver.domain.Role;
+import gabia.votingserver.domain.type.Role;
 import gabia.votingserver.jwt.JwtAuthenticationFilter;
 import gabia.votingserver.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;

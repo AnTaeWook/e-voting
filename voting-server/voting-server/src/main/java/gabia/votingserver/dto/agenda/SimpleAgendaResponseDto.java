@@ -1,7 +1,7 @@
 package gabia.votingserver.dto.agenda;
 
 import gabia.votingserver.domain.Agenda;
-import gabia.votingserver.domain.AgendaType;
+import gabia.votingserver.domain.type.AgendaType;
 import lombok.Data;
 
 import java.time.LocalDateTime;
