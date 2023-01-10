@@ -6,6 +6,7 @@ import gabia.votingserver.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -31,6 +32,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers("/api/sign-up").permitAll()
                 .requestMatchers("/api/login").permitAll()
+                .requestMatchers(HttpMethod.POST, "/api/agendas").hasRole(Role.ADMIN.name())
+                .requestMatchers(HttpMethod.DELETE, "/api/agendas/**").hasRole(Role.ADMIN.name())
+                .requestMatchers("/api/agendas/*/terminate").hasRole(Role.ADMIN.name())
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
