@@ -20,13 +20,13 @@ import java.util.List;
 public class User implements UserDetails {
 
     @Id
-    @Column(updatable = false, unique = true, nullable = false, length = 50)
+    @Column(updatable = false, unique = true, nullable = false)
     private String userId;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String password;
 
-    @Column(nullable = false, length = 50)
+    @Column(nullable = false)
     private String name;
 
     @Column(nullable = false, length = 10)
