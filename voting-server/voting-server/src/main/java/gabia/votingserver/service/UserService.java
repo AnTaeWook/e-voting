@@ -1,9 +1,9 @@
 package gabia.votingserver.service;
 
 import gabia.votingserver.domain.User;
-import gabia.votingserver.dto.TokenInfo;
-import gabia.votingserver.dto.UserJoinRequestDto;
-import gabia.votingserver.dto.UserJoinResponseDto;
+import gabia.votingserver.dto.user.TokenInfo;
+import gabia.votingserver.dto.user.UserJoinRequestDto;
+import gabia.votingserver.dto.user.UserJoinResponseDto;
 import gabia.votingserver.jwt.JwtTokenProvider;
 import gabia.votingserver.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
