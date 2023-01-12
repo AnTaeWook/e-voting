@@ -1,11 +1,15 @@
 package gabia.votingserver.dto.agenda;
 
-import gabia.votingserver.domain.AgendaType;
+import gabia.votingserver.domain.type.AgendaType;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Data
 public class AgendaCreateRequestDto {
     private String title;

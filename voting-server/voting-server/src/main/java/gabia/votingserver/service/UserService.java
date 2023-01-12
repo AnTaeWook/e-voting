@@ -24,6 +24,10 @@ public class UserService {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
+    public User getUser(String userId) {
+        return userRepository.findByUserId(userId).orElseThrow();
+    }
+
     @Transactional
     public UserJoinResponseDto create(UserJoinRequestDto userJoinRequestDto) {
 
@@ -38,7 +42,7 @@ public class UserService {
                 .voteRights(userJoinRequestDto.getVoteRights())
                 .build();
 
-        User savedUser = userRepository.save(user);
+        userRepository.save(user);
 
         return UserJoinResponseDto.from(user);
     }

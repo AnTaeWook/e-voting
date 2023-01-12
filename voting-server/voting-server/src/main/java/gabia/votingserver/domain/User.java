@@ -1,5 +1,7 @@
 package gabia.votingserver.domain;
 
+import gabia.votingserver.domain.auditing.CreatedAtAndModifiedAtBaseEntity;
+import gabia.votingserver.domain.type.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User implements UserDetails {
+public class User extends CreatedAtAndModifiedAtBaseEntity implements UserDetails {
 
     @Id
     @Column(updatable = false, unique = true, nullable = false)

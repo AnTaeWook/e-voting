@@ -1,19 +1,21 @@
 package gabia.votingserver.domain;
 
+import gabia.votingserver.domain.auditing.CreatedAtAndModifiedAtBaseEntity;
+import gabia.votingserver.domain.type.AgendaType;
+import gabia.votingserver.domain.type.VoteType;
 import gabia.votingserver.dto.agenda.AgendaCreateRequestDto;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Entity
-public class Agenda {
+public class Agenda extends CreatedAtAndModifiedAtBaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -53,5 +55,17 @@ public class Agenda {
 
     public static Agenda create(String title, AgendaType type, LocalDateTime startsAt, LocalDateTime endsAt) {
         return new Agenda(title, type, startsAt, endsAt);
+    }
+
+    public int getTotalRights() {
+        return positiveRights + negativeRights + invalidRights;
+    }
+
+    public void vote(VoteType type, int quantity) {
+        switch (type) {
+            case POSITIVE -> positiveRights += quantity;
+            case NEGATIVE -> negativeRights += quantity;
+            case INVALID -> invalidRights += quantity;
+        }
     }
 }
