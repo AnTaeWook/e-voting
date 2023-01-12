@@ -6,7 +6,6 @@ import gabia.votingserver.dto.user.UserJoinRequestDto;
 import gabia.votingserver.dto.user.UserJoinResponseDto;
 import gabia.votingserver.jwt.JwtTokenProvider;
 import gabia.votingserver.repository.UserRepository;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,8 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Optional;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,11 +25,7 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     public User getUser(String userId) {
-        Optional<User> user = userRepository.findByUserId(userId);
-        if (user.isEmpty()) {
-            throw new EntityNotFoundException("해당 ID에 해당하는 유저가 존재하지 않습니다.");
-        }
-        return user.get();
+        return userRepository.findByUserId(userId).orElseThrow();
     }
 
     @Transactional
@@ -49,7 +42,7 @@ public class UserService {
                 .voteRights(userJoinRequestDto.getVoteRights())
                 .build();
 
-        User savedUser = userRepository.save(user);
+        userRepository.save(user);
 
         return UserJoinResponseDto.from(user);
     }
