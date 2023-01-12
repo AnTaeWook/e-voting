@@ -19,7 +19,7 @@ public class Vote extends CreatedAtBaseEntity {
     private Long id;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     @ManyToOne
     private User user;
 
@@ -32,6 +32,7 @@ public class Vote extends CreatedAtBaseEntity {
     @Column(nullable = false, length = 50)
     private VoteType type;
 
+    @Column(nullable = false)
     private Integer rightCount;
 
     private Vote(User user, Agenda agenda, VoteType type, Integer rightCount) {
