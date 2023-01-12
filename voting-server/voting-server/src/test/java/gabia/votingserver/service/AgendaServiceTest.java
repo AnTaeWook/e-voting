@@ -164,6 +164,31 @@ class AgendaServiceTest {
         }).isInstanceOf(RuntimeException.class);
     }
 
+    @DisplayName("사용자가 가진 투표수 이하의 투표권만 행사할 수 있다.")
+    @Test
+    void overVote() {
+        // given
+        Agenda agenda = agendaRepository.save(Agenda.create("사내 휴식시설 증진", AgendaType.NORMAL,
+                LocalDateTime.now(),
+                LocalDateTime.now().plusDays(5)));
+
+        User user = userRepository.save(User.builder()
+                .userId("test")
+                .password("1234")
+                .name("홍길동")
+                .role(Role.USER)
+                .voteRights(10)
+                .build()
+        );
+        VoteType type = VoteType.POSITIVE;
+        int quantity = 11;
+
+        // when&then
+        assertThatThrownBy(() -> {
+            agendaService.vote(user.getUserId(), agenda.getID(), type, quantity);
+        }).isInstanceOf(RuntimeException.class);
+    }
+
     @DisplayName("선착순 투표에 10표 이상 누적되면 투표가 종료된다.")
     @Test
     void voteLimitedAgenda() {
