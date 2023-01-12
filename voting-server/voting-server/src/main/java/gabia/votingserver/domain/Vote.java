@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -16,14 +18,17 @@ public class Vote extends CreatedAtBaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
     @ManyToOne
     private User user;
 
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(nullable = false)
     @ManyToOne
     private Agenda agenda;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false, length = 50)
     private VoteType type;
 
