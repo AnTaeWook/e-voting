@@ -49,7 +49,7 @@ public class UserService {
                 .voteRights(userJoinRequestDto.getVoteRights())
                 .build();
 
-        entityManager.persist(user);
+        userRepository.directSave(user);
 
         return UserJoinResponseDto.from(user);
     }
