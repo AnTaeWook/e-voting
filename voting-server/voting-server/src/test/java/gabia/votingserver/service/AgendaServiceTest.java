@@ -5,6 +5,7 @@ import gabia.votingserver.domain.User;
 import gabia.votingserver.domain.type.AgendaType;
 import gabia.votingserver.domain.type.Role;
 import gabia.votingserver.domain.type.VoteType;
+import gabia.votingserver.error.exception.InvalidVoteException;
 import gabia.votingserver.repository.AgendaRepository;
 import gabia.votingserver.repository.UserRepository;
 import jakarta.persistence.EntityManager;
@@ -186,7 +187,7 @@ class AgendaServiceTest {
         // when&then
         assertThatThrownBy(() -> {
             agendaService.vote(user.getUserId(), agenda.getID(), type, quantity);
-        }).isInstanceOf(RuntimeException.class);
+        }).isInstanceOf(InvalidVoteException.class);
     }
 
     @DisplayName("선착순 투표에 10표 이상 누적되면 투표가 종료된다.")
