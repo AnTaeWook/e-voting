@@ -1,6 +1,7 @@
 package gabia.votingserver.dto.agenda;
 
 import gabia.votingserver.domain.type.AgendaType;
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,6 +13,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Data
 public class AgendaCreateRequestDto {
+
+    @NotBlank
     private String title;
     private AgendaType type;
 

@@ -10,6 +10,7 @@ import gabia.votingserver.repository.VoteRepository;
 import gabia.votingserver.service.AgendaService;
 import gabia.votingserver.service.UserService;
 import gabia.votingserver.util.SecurityUtil;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -31,13 +32,13 @@ public class AgendaController {
 
     @GetMapping("/agendas")
     public Page<AllAgendaResponseDto> agendas(
-            @PageableDefault(size = 10, sort = "startsAt", direction = Sort.Direction.ASC) Pageable pageable) {
+            @PageableDefault(sort = "startsAt", direction = Sort.Direction.ASC) Pageable pageable) {
         return agendaService.getAgendas(pageable).map(AllAgendaResponseDto::from);
     }
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/agendas")
-    public SimpleAgendaResponseDto create(@RequestBody AgendaCreateRequestDto agendaCreateRequestDto) {
+    public SimpleAgendaResponseDto create(@RequestBody @Valid AgendaCreateRequestDto agendaCreateRequestDto) {
         Agenda savedAgenda = agendaService.createAgenda(agendaCreateRequestDto);
         return AgendaResponseFactory.getDto(Role.ADMIN, savedAgenda);
     }
@@ -53,7 +54,7 @@ public class AgendaController {
     }
 
     @PostMapping("/agendas/{id}")
-    public SimpleAgendaResponseDto vote(@PathVariable("id") Long agendaId, @RequestBody VoteRequestDto voteRequestDto) {
+    public SimpleAgendaResponseDto vote(@PathVariable("id") Long agendaId, @RequestBody @Valid VoteRequestDto voteRequestDto) {
         Agenda agenda = agendaService.vote(
                 SecurityUtil.getCurrentUserId(),
                 agendaId,
