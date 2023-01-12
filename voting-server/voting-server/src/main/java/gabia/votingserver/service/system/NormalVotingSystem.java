@@ -19,7 +19,7 @@ public class NormalVotingSystem implements VotingSystem {
     public void vote(User user, Agenda agenda, VoteType type, int quantity) {
         validate(user, agenda, quantity);
         agenda.vote(type, quantity);
-        log.info("{} 님이  {} 에  {} 안건에  {} 표를  {} 표 투표하셨습니다.", user.getName(), LocalDateTime.now(), agenda.getTitle(), type.name(), quantity);
+        log.info("투표자={}, 안건={}, 표 종류={}, 표 개수={}", user.getName(), agenda.getTitle(), type.name(), quantity);
         voteRepository.save(Vote.create(user, agenda, type, quantity));
     }
 
@@ -30,10 +30,11 @@ public class NormalVotingSystem implements VotingSystem {
     }
 
     private void validateAgenda(Agenda agenda) {
-        if (LocalDateTime.now().isBefore(agenda.getStartsAt())) {
+        LocalDateTime now = LocalDateTime.now();
+        if (now.isBefore(agenda.getStartsAt())) {
             throw new RuntimeException("투표 기간이 아닙니다.");
         }
-        if (LocalDateTime.now().isAfter(agenda.getEndsAt())) {
+        if (now.isAfter(agenda.getEndsAt())) {
             throw new RuntimeException("투표가 종료된 안건입니다.");
         }
     }
