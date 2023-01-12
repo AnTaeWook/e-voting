@@ -4,8 +4,12 @@ import gabia.votingserver.domain.User;
 import gabia.votingserver.dto.user.TokenInfo;
 import gabia.votingserver.dto.user.UserJoinRequestDto;
 import gabia.votingserver.dto.user.UserJoinResponseDto;
+import gabia.votingserver.error.code.UserErrorCode;
+import gabia.votingserver.error.exception.DuplicateUserException;
 import gabia.votingserver.jwt.JwtTokenProvider;
 import gabia.votingserver.repository.UserRepository;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -23,6 +27,9 @@ public class UserService {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+
+    @PersistenceContext
+    EntityManager entityManager;
 
     public User getUser(String userId) {
         return userRepository.findByUserId(userId).orElseThrow();
@@ -42,15 +49,9 @@ public class UserService {
                 .voteRights(userJoinRequestDto.getVoteRights())
                 .build();
 
-        userRepository.save(user);
+        entityManager.persist(user);
 
         return UserJoinResponseDto.from(user);
-    }
-
-    private void validateUserId(UserJoinRequestDto userJoinRequestDto) {
-        if (userRepository.findByUserId(userJoinRequestDto.getUserId()).isPresent()) {
-            throw new RuntimeException("이미 존재하는 사용자 ID 입니다.");
-        }
     }
 
     @Transactional
@@ -60,5 +61,11 @@ public class UserService {
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
 
         return jwtTokenProvider.generateToken(authentication);
+    }
+
+    private void validateUserId(UserJoinRequestDto userJoinRequestDto) {
+        if (userRepository.findByUserId(userJoinRequestDto.getUserId()).isPresent()) {
+            throw new DuplicateUserException(UserErrorCode.DUPLICATED_ID);
+        }
     }
 }
