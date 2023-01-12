@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class UserJoinResponseDto {
+
     private String userId;
     private String name;
     private Integer voteRights;
