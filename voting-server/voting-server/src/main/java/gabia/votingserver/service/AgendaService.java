@@ -5,7 +5,7 @@ import gabia.votingserver.domain.User;
 import gabia.votingserver.domain.type.VoteType;
 import gabia.votingserver.dto.agenda.AgendaCreateRequestDto;
 import gabia.votingserver.repository.AgendaRepository;
-import gabia.votingserver.service.system.NormalVotingSystem;
+import gabia.votingserver.service.system.VotingSystem;
 import gabia.votingserver.service.system.VotingSystemFactory;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,9 +54,9 @@ public class AgendaService {
     @Transactional
     public Agenda vote(String userId, Long agendaID, VoteType type, int quantity) {
         User user = userService.getUser(userId);
-        Agenda agenda = agendaRepository.findByIdWithLock(agendaID);
+        Agenda agenda = agendaRepository.findByIdWithLock(agendaID).orElseThrow();
 
-        NormalVotingSystem votingSystem = votingSystemFactory.makeVotingSystem(agenda);
+        VotingSystem votingSystem = votingSystemFactory.makeVotingSystem(agenda);
         votingSystem.vote(user, agenda, type, quantity);
         return agenda;
     }
