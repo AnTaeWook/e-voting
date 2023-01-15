@@ -35,6 +35,7 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/agendas").hasRole(Role.ADMIN.name())
                 .requestMatchers(HttpMethod.DELETE, "/api/agendas/**").hasRole(Role.ADMIN.name())
                 .requestMatchers("/api/agendas/*/terminate").hasRole(Role.ADMIN.name())
+                .requestMatchers(HttpMethod.POST, "/api/votes").hasRole(Role.USER.name())
                 .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
@@ -46,5 +47,4 @@ public class SecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
-
 }
