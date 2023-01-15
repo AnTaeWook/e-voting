@@ -1,14 +1,4 @@
 package gabia.votingserver.dto.user;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-
-@Builder
-@Data
-@AllArgsConstructor
-public class TokenInfo {
-
-    private String grantType;
-    private String accessToken;
+public record TokenInfo (String grantType, String accessToken) {
 }

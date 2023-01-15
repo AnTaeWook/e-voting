@@ -8,6 +8,7 @@ import gabia.votingserver.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -18,15 +19,14 @@ public class UserController {
 
     private final UserService userService;
 
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/sign-up")
     public UserJoinResponseDto join(@RequestBody @Valid UserJoinRequestDto userJoinRequestDto) {
-        return userService.create(userJoinRequestDto);
+        return UserJoinResponseDto.from(userService.create(userJoinRequestDto));
     }
 
     @PostMapping("/login")
     public TokenInfo login(@RequestBody @Valid UserLoginRequestDto userLoginRequestDto) {
-        String userId = userLoginRequestDto.getUserId();
-        String password = userLoginRequestDto.getPassword();
-        return userService.login(userId, password);
+        return userService.login(userLoginRequestDto.userId(), userLoginRequestDto.password());
     }
 }

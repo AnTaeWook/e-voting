@@ -3,7 +3,6 @@ package gabia.votingserver.error;
 import gabia.votingserver.error.code.CommonErrorCode;
 import gabia.votingserver.error.code.ErrorCode;
 import gabia.votingserver.error.exception.RestApiException;
-import io.jsonwebtoken.JwtException;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;

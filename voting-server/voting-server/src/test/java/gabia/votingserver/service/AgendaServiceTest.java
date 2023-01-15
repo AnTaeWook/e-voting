@@ -249,6 +249,6 @@ class AgendaServiceTest {
         Agenda agendaResult = agendaService.vote(user2.getUserId(), agenda.getID(), type, 7);
 
         // then
-        assertThat(agenda.getTotalRights()).isEqualTo(10);
+        assertThat(agendaResult.getTotalRights()).isEqualTo(10);
     }
 }

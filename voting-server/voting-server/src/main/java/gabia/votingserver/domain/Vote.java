@@ -12,6 +12,10 @@ import org.hibernate.annotations.OnDeleteAction;
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
+@Table(indexes = {
+        @Index(columnList = "agenda_id"),
+        @Index(columnList = "agenda_id, user_id")
+})
 public class Vote extends CreatedAtBaseEntity {
 
     @Id
@@ -24,7 +28,7 @@ public class Vote extends CreatedAtBaseEntity {
     private User user;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(nullable = false)
+    @JoinColumn(name = "agenda_id", nullable = false)
     @ManyToOne
     private Agenda agenda;
 
