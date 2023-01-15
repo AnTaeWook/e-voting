@@ -1,14 +1,13 @@
 package gabia.votingserver.controller;
 
 import gabia.votingserver.domain.Agenda;
-import gabia.votingserver.domain.User;
 import gabia.votingserver.domain.type.Role;
 import gabia.votingserver.dto.agenda.*;
 import gabia.votingserver.dto.agenda.single.AgendaResponseFactory;
 import gabia.votingserver.dto.agenda.single.SimpleAgendaResponseDto;
-import gabia.votingserver.repository.VoteRepository;
+import gabia.votingserver.dto.vote.VoteRequestDto;
 import gabia.votingserver.service.AgendaService;
-import gabia.votingserver.service.UserService;
+import gabia.votingserver.service.VoteService;
 import gabia.votingserver.util.SecurityUtil;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -27,8 +26,7 @@ import java.time.LocalDateTime;
 public class AgendaController {
 
     private final AgendaService agendaService;
-    private final UserService userService;
-    private final VoteRepository voteRepository;
+    private final VoteService voteService;
 
     @GetMapping("/agendas")
     public Page<AllAgendaResponseDto> agendas(
@@ -46,18 +44,19 @@ public class AgendaController {
     @GetMapping("/agendas/{id}")
     public SimpleAgendaResponseDto agenda(@PathVariable("id") Long agendaId) {
         Agenda agenda = agendaService.getAgenda(agendaId);
-        User user = userService.getUser(SecurityUtil.getCurrentUserId());
-        if (LocalDateTime.now().isAfter(agenda.getEndsAt()) && user.getRole().equals(Role.ADMIN)) {
-            return AgendaResponseFactory.getDto(user.getRole(), agenda, voteRepository.findAllWithAgenda(agenda));
+        Role role = Role.valueOf(SecurityUtil.getCurrentUserRole());
+
+        if (LocalDateTime.now().isAfter(agenda.getEndsAt()) && role.equals(Role.ADMIN)) {
+            return AgendaResponseFactory.getDto(agenda, voteService.getVotesWithAgenda(agenda));
         }
-        return AgendaResponseFactory.getDto(user.getRole(), agenda);
+        return AgendaResponseFactory.getDto(role, agenda);
     }
 
-    @PostMapping("/agendas/{id}")
-    public SimpleAgendaResponseDto vote(@PathVariable("id") Long agendaId, @RequestBody @Valid VoteRequestDto voteRequestDto) {
+    @PostMapping("/votes")
+    public SimpleAgendaResponseDto vote(@RequestBody @Valid VoteRequestDto voteRequestDto) {
         Agenda agenda = agendaService.vote(
                 SecurityUtil.getCurrentUserId(),
-                agendaId,
+                voteRequestDto.getAgendaId(),
                 voteRequestDto.getType(),
                 voteRequestDto.getQuantity());
         return AgendaResponseFactory.getDto(Role.USER, agenda);
