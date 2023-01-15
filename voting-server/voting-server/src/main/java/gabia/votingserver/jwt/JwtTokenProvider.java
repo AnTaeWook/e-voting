@@ -50,10 +50,7 @@ public class JwtTokenProvider {
                 .signWith(key, SignatureAlgorithm.HS256)
                 .compact();
 
-        return TokenInfo.builder()
-                .grantType("Bearer")
-                .accessToken(accessToken)
-                .build();
+        return new TokenInfo("Bearer", accessToken);
     }
 
     public Authentication getAuthentication(String accessToken) {
@@ -83,6 +80,7 @@ public class JwtTokenProvider {
         } catch (IllegalArgumentException e) {
             log.info("JWT claims string is empty");
         }
+
         return false;
     }
 
