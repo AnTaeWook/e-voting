@@ -6,5 +6,5 @@ import gabia.votingserver.domain.type.VoteType;
 
 public interface VotingSystem {
 
-    public void vote(User user, Agenda agenda, VoteType type, int quantity);
+    void vote(User user, Agenda agenda, VoteType type, int quantity);
 }

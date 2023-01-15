@@ -19,7 +19,7 @@ public class AgendaResponseFactory {
         };
     }
 
-    public static SimpleAgendaResponseDto getDto(Role role, Agenda agenda, List<Vote> votes) {
+    public static SimpleAgendaResponseDto getDto(Agenda agenda, List<Vote> votes) {
         return new DetailResultAgendaResponse(votes).from(agenda);
     }
 }
