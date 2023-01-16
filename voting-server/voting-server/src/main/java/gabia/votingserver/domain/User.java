@@ -35,7 +35,7 @@ public class User extends CreatedAtAndModifiedAtBaseEntity implements UserDetail
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private Integer voteRights;
+    private int voteRights;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
