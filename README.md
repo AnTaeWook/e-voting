@@ -21,6 +21,7 @@
     - _Spring validation_
     - _Lombok_
 
+<br/>
 
 - ### MySQL(DB)
 
@@ -513,8 +514,8 @@ OSIV 옵션을 끔으로써 DB connection을 효율적으로 관리할 수 있�
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(indexes = {
-@Index(columnList = "agenda_id"),
-@Index(columnList = "agenda_id, user_id")
+    @Index(columnList = "agenda_id"),
+    @Index(columnList = "agenda_id, user_id")
 })
 public class Vote extends CreatedAtBaseEntity {
     ...
