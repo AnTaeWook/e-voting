@@ -244,9 +244,9 @@ A와 B가 순서대로 투표에 참여한다면 A는 3개의 의결권을 모�
 ```java
 @Override
 public void vote(User user, Agenda agenda, VoteType type, int quantity) {
-    quantity = Math.min(quantity, 10 - agenda.getTotalRights());
+    quantity = Math.min(quantity, MAX_VOTE_COUNT - agenda.getTotalRights());
     super.vote(user, agenda, type, quantity);
-    if (agenda.getTotalRights() >= 10) {
+    if (agenda.getTotalRights() >= MAX_VOTE_COUNT) {
         agenda.setEndsAt(LocalDateTime.now());
     }
 }
