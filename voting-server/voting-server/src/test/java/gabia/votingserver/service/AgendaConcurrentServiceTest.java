@@ -6,6 +6,7 @@ import gabia.votingserver.domain.type.Role;
 import gabia.votingserver.domain.type.VoteType;
 import gabia.votingserver.dto.agenda.AgendaCreateRequestDto;
 import gabia.votingserver.dto.user.UserJoinRequestDto;
+import gabia.votingserver.error.exception.InvalidVoteException;
 import gabia.votingserver.repository.AgendaRepository;
 import gabia.votingserver.repository.UserRepository;
 import org.junit.jupiter.api.AfterEach;
@@ -89,7 +90,7 @@ public class AgendaConcurrentServiceTest {
                 try {
                     tt.vote(agendaService, "test", agenda.getID(), VoteType.POSITIVE, 3);
                 } catch (Exception e) {
-                    assertThat(e.getMessage()).isEqualTo("투표가 종료된 안건입니다.");
+                    assertThat(e).isInstanceOf(InvalidVoteException.class);
                 } finally {
                     countDownLatch.countDown();
                 }
