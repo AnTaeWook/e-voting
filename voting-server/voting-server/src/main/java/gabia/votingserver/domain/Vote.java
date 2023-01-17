@@ -13,7 +13,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(indexes = {
-        @Index(columnList = "agenda_id"),
         @Index(columnList = "agenda_id, user_id")
 })
 public class Vote extends CreatedAtBaseEntity {
