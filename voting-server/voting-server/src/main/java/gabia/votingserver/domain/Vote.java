@@ -24,12 +24,12 @@ public class Vote extends CreatedAtBaseEntity {
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "agenda_id", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Agenda agenda;
 
     @Enumerated(value = EnumType.STRING)
