@@ -43,7 +43,7 @@ public class AgendaService {
     }
 
     @Transactional
-    public Agenda terminate(long agendaId) {
+    public Agenda terminateAgenda(long agendaId) {
         Agenda agenda = agendaRepository.findById(agendaId).orElseThrow();
         agenda.terminate();
         return agenda;
