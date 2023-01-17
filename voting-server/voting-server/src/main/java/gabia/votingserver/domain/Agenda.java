@@ -46,8 +46,8 @@ public class Agenda extends CreatedAtAndModifiedAtBaseEntity {
         this.endsAt = endsAt;
     }
 
-    public void terminate(LocalDateTime endsAt) {
-        this.endsAt = endsAt;
+    public void terminate() {
+        this.endsAt = LocalDateTime.now();
     }
 
     public static Agenda of(AgendaCreateRequestDto requestDto) {

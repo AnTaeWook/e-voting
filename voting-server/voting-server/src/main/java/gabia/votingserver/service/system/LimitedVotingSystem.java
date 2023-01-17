@@ -6,8 +6,6 @@ import gabia.votingserver.domain.type.VoteType;
 import gabia.votingserver.repository.VoteRepository;
 import org.springframework.stereotype.Component;
 
-import java.time.LocalDateTime;
-
 @Component
 public class LimitedVotingSystem extends NormalVotingSystem {
 
@@ -22,7 +20,7 @@ public class LimitedVotingSystem extends NormalVotingSystem {
         quantity = Math.min(quantity, MAX_VOTE_COUNT - agenda.getTotalRights());
         super.vote(user, agenda, type, quantity);
         if (agenda.getTotalRights() >= MAX_VOTE_COUNT) {
-            agenda.terminate(LocalDateTime.now());
+            agenda.terminate();
         }
     }
 }
