@@ -12,7 +12,8 @@ public enum UserErrorCode implements ErrorCode {
     DUPLICATED_ID(HttpStatus.CONFLICT, "ID already exists"),
     WRONG_PERIOD(HttpStatus.BAD_REQUEST, "Not voting period"),
     EXCEED_VOTE(HttpStatus.BAD_REQUEST, "Exceeding the number of possible votes"),
-    DUPLICATED_VOTE(HttpStatus.BAD_REQUEST, "Duplicate voting is not allowed")
+    DUPLICATED_VOTE(HttpStatus.BAD_REQUEST, "Duplicate voting is not allowed"),
+    NO_AUTHENTICATION(HttpStatus.FORBIDDEN, "Cannot find authentication in token"),
     ;
 
     private final HttpStatus httpStatus;
