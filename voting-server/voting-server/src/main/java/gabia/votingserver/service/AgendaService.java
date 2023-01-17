@@ -14,8 +14,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
-
 @Slf4j
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
@@ -45,9 +43,9 @@ public class AgendaService {
     }
 
     @Transactional
-    public Agenda terminate(long agendaId) {
+    public Agenda terminateAgenda(long agendaId) {
         Agenda agenda = agendaRepository.findById(agendaId).orElseThrow();
-        agenda.setEndsAt(LocalDateTime.now());
+        agenda.terminate();
         return agenda;
     }
 

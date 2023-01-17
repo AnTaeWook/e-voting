@@ -19,10 +19,16 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(indexes = {
+        @Index(columnList = "user_id")
+})
 public class User extends CreatedAtAndModifiedAtBaseEntity implements UserDetails {
 
     @Id
-    @Column(updatable = false, unique = true, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column(name = "user_id", updatable = false, unique = true, nullable = false)
     private String userId;
 
     @Column(nullable = false)

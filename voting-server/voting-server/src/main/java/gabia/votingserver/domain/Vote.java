@@ -13,7 +13,6 @@ import org.hibernate.annotations.OnDeleteAction;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(indexes = {
-        @Index(columnList = "agenda_id"),
         @Index(columnList = "agenda_id, user_id")
 })
 public class Vote extends CreatedAtBaseEntity {
@@ -24,12 +23,12 @@ public class Vote extends CreatedAtBaseEntity {
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "agenda_id", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Agenda agenda;
 
     @Enumerated(value = EnumType.STRING)

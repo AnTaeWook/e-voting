@@ -69,7 +69,7 @@ public class AgendaController {
 
     @PatchMapping("/agendas/{id}/terminate")
     public SimpleAgendaResponseDto end(@PathVariable("id") Long agendaId) {
-        Agenda agenda = agendaService.terminate(agendaId);
+        Agenda agenda = agendaService.terminateAgenda(agendaId);
         return AgendaResponseFactory.getDto(Role.ADMIN, agenda);
     }
 }

@@ -3,16 +3,14 @@ package gabia.votingserver.dto.agenda;
 import gabia.votingserver.domain.type.AgendaType;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDateTime;
 
-@NoArgsConstructor
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-@Data
 public class AgendaCreateRequestDto {
 
     @NotBlank

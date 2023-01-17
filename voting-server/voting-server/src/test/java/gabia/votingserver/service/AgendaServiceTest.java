@@ -107,7 +107,7 @@ class AgendaServiceTest {
         entityManager.detach(agendaBefore);
 
         // when
-        Agenda agendaAfter = agendaService.terminate(agendaBefore.getID());
+        Agenda agendaAfter = agendaService.terminateAgenda(agendaBefore.getID());
 
         // then
         assertThat(agendaAfter.getEndsAt().isBefore(agendaBefore.getEndsAt())).isTrue();

@@ -2,9 +2,12 @@ package gabia.votingserver.dto.vote;
 
 import gabia.votingserver.domain.type.VoteType;
 import jakarta.validation.constraints.Positive;
-import lombok.Data;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@Data
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class VoteRequestDto {
 
     @Positive

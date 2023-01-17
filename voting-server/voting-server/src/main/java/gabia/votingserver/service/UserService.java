@@ -41,8 +41,7 @@ public class UserService {
                 .voteRights(userJoinRequestDto.voteRights())
                 .build();
 
-        userRepository.directSave(user);
-        return user;
+        return userRepository.save(user);
     }
 
     @Transactional

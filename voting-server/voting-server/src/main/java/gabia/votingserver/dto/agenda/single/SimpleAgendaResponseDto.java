@@ -2,11 +2,16 @@ package gabia.votingserver.dto.agenda.single;
 
 import gabia.votingserver.domain.Agenda;
 import gabia.votingserver.domain.type.AgendaType;
-import lombok.Data;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Data
+@Getter
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class SimpleAgendaResponseDto {
 
     private Long id;
@@ -16,15 +21,20 @@ public class SimpleAgendaResponseDto {
     private LocalDateTime endsAt;
 
     public void setFrom(Agenda agenda) {
-        this.setId(agenda.getID());
-        this.setTitle(agenda.getTitle());
-        this.setType(agenda.getType());
-        this.setStartsAt(agenda.getStartsAt());
-        this.setEndsAt(agenda.getEndsAt());
+        this.id = agenda.getID();
+        this.title = agenda.getTitle();
+        this.type = agenda.getType();
+        this.startsAt = agenda.getStartsAt();
+        this.endsAt = agenda.getEndsAt();
     }
 
     public SimpleAgendaResponseDto from(Agenda agenda) {
-        setFrom(agenda);
-        return this;
+        return new SimpleAgendaResponseDto(
+                agenda.getID(),
+                agenda.getTitle(),
+                agenda.getType(),
+                agenda.getStartsAt(),
+                agenda.getEndsAt()
+        );
     }
 }
