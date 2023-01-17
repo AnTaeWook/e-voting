@@ -2,11 +2,14 @@ package gabia.votingserver.dto.vote;
 
 import gabia.votingserver.domain.Vote;
 import gabia.votingserver.domain.type.VoteType;
+import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-@AllArgsConstructor
-@Data
+@Getter
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class VoteResponseDto {
 
     private String userName;

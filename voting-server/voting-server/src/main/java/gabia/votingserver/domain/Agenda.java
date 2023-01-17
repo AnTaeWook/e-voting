@@ -8,7 +8,6 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.time.LocalDateTime;
 
@@ -37,7 +36,6 @@ public class Agenda extends CreatedAtAndModifiedAtBaseEntity {
     @Column(nullable = false)
     private LocalDateTime startsAt;
 
-    @Setter
     @Column(nullable = false)
     private LocalDateTime endsAt;
 
@@ -45,6 +43,10 @@ public class Agenda extends CreatedAtAndModifiedAtBaseEntity {
         this.title = title;
         this.type = type;
         this.startsAt = startsAt;
+        this.endsAt = endsAt;
+    }
+
+    public void terminate(LocalDateTime endsAt) {
         this.endsAt = endsAt;
     }
 

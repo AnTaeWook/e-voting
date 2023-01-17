@@ -11,16 +11,18 @@ import java.time.LocalDateTime;
 @Component
 public class LimitedVotingSystem extends NormalVotingSystem {
 
+    private static final int MAX_VOTE_COUNT = 10;
+
     public LimitedVotingSystem(VoteRepository voteRepository) {
         super(voteRepository);
     }
 
     @Override
     public void vote(User user, Agenda agenda, VoteType type, int quantity) {
-        quantity = Math.min(quantity, 10 - agenda.getTotalRights());
+        quantity = Math.min(quantity, MAX_VOTE_COUNT - agenda.getTotalRights());
         super.vote(user, agenda, type, quantity);
-        if (agenda.getTotalRights() >= 10) {
-            agenda.setEndsAt(LocalDateTime.now());
+        if (agenda.getTotalRights() >= MAX_VOTE_COUNT) {
+            agenda.terminate(LocalDateTime.now());
         }
     }
 }

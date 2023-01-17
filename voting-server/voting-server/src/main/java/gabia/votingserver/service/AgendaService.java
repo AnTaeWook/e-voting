@@ -47,7 +47,7 @@ public class AgendaService {
     @Transactional
     public Agenda terminate(long agendaId) {
         Agenda agenda = agendaRepository.findById(agendaId).orElseThrow();
-        agenda.setEndsAt(LocalDateTime.now());
+        agenda.terminate(LocalDateTime.now());
         return agenda;
     }
 
