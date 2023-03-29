@@ -60,7 +60,7 @@
 
 <br/>
 
-![server2](https://user-images.githubusercontent.com/55526071/212576203-dae86dc1-bb0f-410e-878a-dc1f5ebf135e.PNG)
+![image](https://user-images.githubusercontent.com/55526071/228472366-e99f45e5-f966-4d96-873b-8572858b0a53.png)
 
 ### 서버 내 컨트롤러, 서비스, 리포지토리 분리
 - **Controller:** &nbsp;&nbsp; 웹 MVC의 컨트롤러 역할(REST controller) + 클라이언트에게 전달할 DTO로의 변환
